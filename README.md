@@ -4,6 +4,21 @@ An AI-powered Customer Complaint Management System built using **React**, **Fast
 
 ---
 
+---
+
+# 🚀 Live Demo
+
+### Frontend
+
+https://ai-customer-complaint-management-sy.vercel.app
+
+### Backend API
+
+https://ai-customer-complaint-management-system.onrender.com/docs
+
+---
+
+
 ## 🚀 Features
 
 - 🤖 AI-powered complaint analysis
