@@ -23,7 +23,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://ai-customer-complaint-management-system.onrender.com",
+        "https://ai-customer-complaint-management-sy.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
