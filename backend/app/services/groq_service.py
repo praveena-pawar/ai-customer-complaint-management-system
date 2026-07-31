@@ -1,5 +1,6 @@
 from groq import Groq
 from app.config.settings import GROQ_API_KEY
+import json
 
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -72,8 +73,22 @@ def analyze_complaint(text: str):
                 - batch_number:
                 Extract the batch or lot number exactly as written.
 
-                - manufacturing_date:
-                Extract the manufacturing date exactly as written.
+            - manufacturing_date:
+            Extract the manufacturing date exactly as written.
+
+            Look for labels such as:
+            - Manufacturing Date
+            - Mfg Date
+            - MFG Date
+            - Manufactured On
+            - Date of Manufacture
+
+            Example:
+            If the document contains:
+            "Manufacturing Date: 15-Jul-2024"
+
+            Return:
+            "manufacturing_date": "15-Jul-2024"
 
                 - expiry_date:
                 Extract the expiry date exactly as written.
@@ -129,10 +144,62 @@ def analyze_complaint(text: str):
                 "summary": ""
                 }
                 """
+                
             },
             {
                 "role": "user",
                 "content": text
+            }
+        ],
+        temperature=0,
+    )
+
+    return response.choices[0].message.content
+
+
+
+
+
+
+def edit_complaint(current_complaint: dict, instruction: str):
+
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-120b",
+        messages=[
+            {
+                "role": "system",
+                "content": """
+                You are an AI Complaint Copilot for a pharmaceutical company.
+
+                Your job is to update an EXISTING complaint.
+
+                Rules:
+
+                1. Read the existing complaint JSON.
+                2. Read the user's correction.
+                3. Update ONLY the fields mentioned in the correction.
+                4. Keep every other field exactly the same.
+                5. If the correction changes the severity or business risk,
+                update severity, suggested_next_action,
+                risk_assessment and summary.
+                6. Return ONLY valid JSON.
+                7. Do not return markdown.
+                8. Do not explain anything.
+                """
+            },
+            {
+                "role": "user",
+                "content": f"""
+                Existing Complaint:
+
+                {json.dumps(current_complaint, indent=2)}
+
+                User Instruction:
+
+                {instruction}
+
+                Return the complete updated complaint JSON.
+                """
             }
         ],
         temperature=0,

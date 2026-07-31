@@ -1,0 +1,67 @@
+/* =====================================
+   AI COPILOT RISK ASSESSMENT
+===================================== */
+
+.risk-card {
+    margin-top: 30px;
+    padding: 24px;
+    background: #f8fbff;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+}
+
+.risk-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    font-size: 20px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.risk-card .form-group {
+    margin-bottom: 20px;
+}
+
+.risk-card .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.risk-card label {
+    display: block;
+    margin-bottom: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.risk-card input,
+.risk-card textarea {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #111827;
+
+    font-size: 15px;
+
+    resize: none;
+    box-sizing: border-box;
+}
+
+.risk-card input:focus,
+.risk-card textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+}
+
+.risk-card textarea {
+    min-height: 85px;
+}

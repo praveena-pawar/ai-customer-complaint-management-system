@@ -1,0 +1,23 @@
+.dashboard {
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+.dashboard-body {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    gap: 24px;
+
+    padding: 24px;
+}
+
+.left-panel {
+    min-width: 0;
+}
+
+.right-panel {
+    position: sticky;
+    top: 24px;
+
+    height: calc(100vh - 48px);
+}

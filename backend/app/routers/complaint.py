@@ -13,4 +13,9 @@ def analyze(
     request: ComplaintRequest,
     db: Session = Depends(get_db)
 ):
-    return analyze_complaint(request, db)
+    try:
+        return analyze_complaint(request, db)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise
